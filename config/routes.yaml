@@ -1,0 +1,3 @@
+survos_ux_calendar:
+    resource: ../src/Controller/
+    type: attribute

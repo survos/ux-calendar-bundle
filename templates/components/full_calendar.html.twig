@@ -1,0 +1,19 @@
+<div
+    {{ attributes.defaults(
+        stimulus_controller(stimulusController, {
+            url: url,
+            icsUrl: icsUrl,
+            format: format,
+            initialView: initialView,
+            timeZone: timeZone,
+            editable: editable,
+            navLinks: navLinks,
+            dayMaxEvents: dayMaxEvents,
+            headerToolbar: headerToolbar,
+            filters: filters,
+            options: options,
+        })
+    ) }}
+>
+    <div class="{{ calendarClass }}" {{ stimulus_target(stimulusController, 'calendar') }}></div>
+</div>

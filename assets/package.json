@@ -1,0 +1,44 @@
+{
+  "name": "@survos/ux-calendar",
+  "description": "integrate php and javascript helpers for FullCalendar with AssetMapper and Symfony UX",
+  "license": "MIT",
+  "version": "1.0.0",
+  "symfony": {
+    "controllers": {
+      "fullcalendar": {
+        "main": "src/controllers/fullcalendar_controller.js",
+        "webpackMode": "eager",
+        "fetch": "lazy",
+        "enabled": true
+      }
+    },
+    "importmap": {
+      "@hotwired/stimulus": "3.2.2",
+      "preact": "10.19.5",
+      "preact/hooks": "10.19.5",
+      "preact/jsx-runtime": "10.19.5",
+      "preact/compat": "10.19.5",
+      "preact/compat/client": "10.19.5",
+      "temporal-polyfill/fns/zoneddatetime": "0.3.2",
+      "temporal-polyfill/fns/plaindatetime": "0.3.2",
+      "temporal-polyfill/fns/instant": "0.3.2",
+      "@full-ui/headless-calendar": "7.0.0-beta.8",
+      "fullcalendar": "7.0.0-beta.8",
+      "fullcalendar/themes/classic": "7.0.0-beta.8",
+      "fullcalendar/interaction": "7.0.0-beta.8",
+      "fullcalendar/daygrid": "7.0.0-beta.8",
+      "fullcalendar/timegrid": "7.0.0-beta.8",
+      "fullcalendar/list": "7.0.0-beta.8"
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.2.2"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@full-ui/headless-calendar": "7.0.0-beta.8",
+    "fullcalendar": "7.0.0-beta.8",
+    "preact": "10.19.5",
+    "temporal-polyfill": "0.3.2"
+  }
+}
