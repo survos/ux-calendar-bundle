@@ -9,13 +9,13 @@ use Survos\UxCalendarBundle\Controller\CalendarFeedController;
 use Survos\UxCalendarBundle\Mapper\AttributeEntityEventMapper;
 use Survos\UxCalendarBundle\Service\EventSourceRegistry;
 use Survos\UxCalendarBundle\Source\IcsEventSource;
-use Survos\CoreBundle\Bundle\AssetMapperBundle;
+use Survos\Kit\AbstractUxBundle;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
-class SurvosUxCalendarBundle extends AssetMapperBundle
+class SurvosUxCalendarBundle extends AbstractUxBundle
 {
     public const ASSET_PACKAGE = 'ux-calendar';
 
