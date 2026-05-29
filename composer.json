@@ -26,12 +26,12 @@
         "symfony/stimulus-bundle": "^2.0|^3.0",
         "symfony/ux-twig-component": "^2.0|^3.0",
         "twig/twig": "^3.4",
-        "survos/kit-bundle": "^2.0"
+        "survos/kit-bundle": "^2.5"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^13",
+        "phpunit/phpunit": "^13.0",
         "symfony/framework-bundle": "^8.0",
         "symfony/phpunit-bridge": "^8.0",
         "symfony/twig-bundle": "^8.0",
