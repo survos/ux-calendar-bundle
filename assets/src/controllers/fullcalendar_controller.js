@@ -1,7 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { Calendar } from 'fullcalendar';
 import classicThemePlugin from 'fullcalendar/themes/classic';
-import interactionPlugin from 'fullcalendar/interaction';
 import dayGridPlugin from 'fullcalendar/daygrid';
 import timeGridPlugin from 'fullcalendar/timegrid';
 import listPlugin from 'fullcalendar/list';
@@ -63,8 +62,7 @@ export default class extends Controller {
         }
 
         const options = {
-            plugins: [classicThemePlugin, interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
-            themeSystem: 'classic',
+            plugins: [classicThemePlugin, dayGridPlugin, timeGridPlugin, listPlugin],
             initialView: this.initialViewValue,
             headerToolbar: this.hasHeaderToolbarValue ? this.headerToolbarValue : {
                 left: 'prev,next today',
@@ -81,6 +79,17 @@ export default class extends Controller {
             editable: this.editableValue,
             dayMaxEvents: this.dayMaxEventsValue,
             eventSources: this.buildEventSources(),
+            eventsSet: () => this.applyVisibility(),
+            // FullCalendar v7's classic theme paints events from the `--fc-classic-event`
+            // CSS variable (default --fc-classic-primary), ignoring per-event backgroundColor.
+            // Set the variable per event so each calendar keeps its own color.
+            eventDidMount: (info) => {
+                const color = info.event.extendedProps?.sourceColor;
+                if (color) {
+                    info.el.style.setProperty('--fc-classic-event', color);
+                    info.el.style.setProperty('--fc-event-color', color);
+                }
+            },
             timeZone: this.timeZoneValue,
             ...(this.hasOptionsValue ? this.optionsValue : {}),
         };
@@ -130,6 +139,33 @@ export default class extends Controller {
     closeModal() {
         if (this.hasModalTarget && typeof this.modalTarget.close === 'function') {
             this.modalTarget.close();
+        }
+    }
+
+    // Show/hide a whole calendar. Each event carries `extendedProps.sourceId`, so we
+    // flip the FullCalendar display prop for every event of an unchecked source.
+    // Re-applied on eventsSet so events loaded later (month navigation) stay consistent.
+    toggleSource() {
+        this.hiddenSources = new Set(
+            Array.from(this.element.querySelectorAll('.ux-calendar-legend input[type="checkbox"]:not(:checked)'))
+                .map((input) => input.value),
+        );
+        this.applyVisibility();
+    }
+
+    applyVisibility() {
+        if (!this.calendar || !this.hiddenSources || this._applyingVisibility) {
+            return;
+        }
+
+        this._applyingVisibility = true;
+        try {
+            this.calendar.getEvents().forEach((event) => {
+                const sourceId = event.extendedProps?.sourceId;
+                event.setProp('display', this.hiddenSources.has(sourceId) ? 'none' : 'auto');
+            });
+        } finally {
+            this._applyingVisibility = false;
         }
     }
 }

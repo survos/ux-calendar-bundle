@@ -5,9 +5,41 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            {# FullCalendar v7 ships CSS as separate files (no JS auto-injection). #}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/skeleton.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/themes/classic/theme.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/themes/classic/palette.css">
         {% endblock %}
 
         {% block javascripts %}
+            {#
+                Raw FullCalendar v7 ESM, NOT the jsDelivr "/+esm" bundles AssetMapper would
+                download — the +esm build mangles FullCalendar's preact class components
+                (fullcalendar issue #7474: "Class constructor component cannot be invoked
+                without 'new'"). These raw published files load their own ./chunks/* from the
+                CDN and resolve bare specifiers (preact, fullcalendar, …) via this importmap.
+                The browser merges this with AssetMapper's importmap below (multiple importmaps).
+            #}
+            <script type="importmap">
+            {
+                "imports": {
+                    "preact": "https://cdn.jsdelivr.net/npm/preact@10.29.1/dist/preact.mjs",
+                    "preact/hooks": "https://cdn.jsdelivr.net/npm/preact@10.19.5/hooks/dist/hooks.mjs",
+                    "preact/jsx-runtime": "https://cdn.jsdelivr.net/npm/preact@10.19.5/jsx-runtime/dist/jsxRuntime.mjs",
+                    "preact/compat": "https://cdn.jsdelivr.net/npm/preact@10.19.5/compat/dist/compat.mjs",
+                    "preact/compat/client": "https://cdn.jsdelivr.net/npm/preact@10.19.5/compat/client.mjs",
+                    "temporal-polyfill/fns/zoneddatetime": "https://cdn.jsdelivr.net/npm/temporal-polyfill@0.3.2/fns/zoneddatetime.js",
+                    "temporal-polyfill/fns/plaindatetime": "https://cdn.jsdelivr.net/npm/temporal-polyfill@0.3.2/fns/plaindatetime.js",
+                    "temporal-polyfill/fns/instant": "https://cdn.jsdelivr.net/npm/temporal-polyfill@0.3.2/fns/instant.js",
+                    "@full-ui/headless-calendar": "https://cdn.jsdelivr.net/npm/@full-ui/headless-calendar@7.0.0-rc.3/index.js",
+                    "fullcalendar": "https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/index.js",
+                    "fullcalendar/themes/classic": "https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/themes/classic.js",
+                    "fullcalendar/daygrid": "https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/daygrid.js",
+                    "fullcalendar/timegrid": "https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/timegrid.js",
+                    "fullcalendar/list": "https://cdn.jsdelivr.net/npm/fullcalendar@7.0.0-rc.3/list.js"
+                }
+            }
+            </script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
 

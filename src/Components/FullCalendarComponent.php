@@ -9,8 +9,12 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('full_calendar', template: '@SurvosUxCalendar/components/full_calendar.html.twig')]
 final class FullCalendarComponent
 {
+    /**
+     * @param array<string, array{label?: string, color?: string, url?: string}> $calendars
+     */
     public function __construct(
         public ?string $stimulusController = null,
+        public array $calendars = [],
     ) {
     }
 

@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UX Calendar Demo</title>
-</head>
-<body>
-    <main>
+{% extends 'base.html.twig' %}
+
+{% block title %}UX Calendar Demo{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ux-calendar-legend { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: 0 0 1rem; }
+        .ux-calendar-legend__item { display: inline-flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
+        .ux-calendar-legend__swatch { width: .9rem; height: .9rem; border-radius: 3px; display: inline-block; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <main style="max-width: 1000px; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif;">
         <h1>UX Calendar Demo</h1>
+        <p>External source: US Holidays (iCal feed from calendarlabs.com), normalized through
+            <code>EventSourceInterface</code> and rendered with FullCalendar via AssetMapper.</p>
+
         <twig:full_calendar
             url="{{ eventsUrl }}"
-            icsUrl="{{ icsUrl }}"
             initialView="dayGridMonth"
+            :options="{ height: 750 }"
         />
     </main>
-</body>
-</html>
+{% endblock %}

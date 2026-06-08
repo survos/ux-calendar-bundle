@@ -16,7 +16,6 @@ final class HomepageController extends AbstractController
     {
         return $this->render('homepage.html.twig', [
             'eventsUrl' => $this->generateUrl('survos_ux_calendar_feed', [], UrlGeneratorInterface::ABSOLUTE_PATH),
-            'icsUrl' => 'https://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics',
         ]);
     }
 }

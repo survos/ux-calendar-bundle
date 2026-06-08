@@ -21,9 +21,11 @@ final class CalendarFeedController extends AbstractController
     #[Route('/ux-calendar/events', name: 'survos_ux_calendar_feed', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): JsonResponse
     {
-        $start = $this->parseDate($request->get('start'), 'start');
-        $end = $this->parseDate($request->get('end'), 'end');
-        $filters = $this->parseFilters($request->get('filters', []));
+        $params = [...$request->query->all(), ...$request->request->all()];
+
+        $start = $this->parseDate($params['start'] ?? null, 'start');
+        $end = $this->parseDate($params['end'] ?? null, 'end');
+        $filters = $this->parseFilters($params['filters'] ?? []);
 
         $events = array_map(
             static fn($event) => $event->toArray(),

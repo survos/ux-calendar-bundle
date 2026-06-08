@@ -1,19 +1,35 @@
+{# Build the Stimulus values map. Object-typed values (headerToolbar/filters/options)
+   must serialize as JSON objects: an empty PHP array encodes as "[]", which the
+   Stimulus Object value reader rejects. So only include them when non-empty. #}
+{% set controllerValues = {
+    url: url,
+    icsUrl: icsUrl,
+    format: format,
+    initialView: initialView,
+    timeZone: timeZone,
+    editable: editable,
+    navLinks: navLinks,
+    dayMaxEvents: dayMaxEvents,
+} %}
+{% if headerToolbar is not empty %}{% set controllerValues = controllerValues|merge({ headerToolbar: headerToolbar }) %}{% endif %}
+{% if filters is not empty %}{% set controllerValues = controllerValues|merge({ filters: filters }) %}{% endif %}
+{% if options is not empty %}{% set controllerValues = controllerValues|merge({ options: options }) %}{% endif %}
 <div
-    {{ attributes.defaults(
-        stimulus_controller(stimulusController, {
-            url: url,
-            icsUrl: icsUrl,
-            format: format,
-            initialView: initialView,
-            timeZone: timeZone,
-            editable: editable,
-            navLinks: navLinks,
-            dayMaxEvents: dayMaxEvents,
-            headerToolbar: headerToolbar,
-            filters: filters,
-            options: options,
-        })
-    ) }}
+    {{ attributes.defaults(stimulus_controller(stimulusController, controllerValues)) }}
 >
+    {% if calendars is not empty %}
+        <div class="ux-calendar-legend">
+            {% for id, calendar in calendars %}
+                <label class="ux-calendar-legend__item">
+                    <input type="checkbox" checked
+                           value="{{ id }}"
+                           {{ stimulus_action(stimulusController, 'toggleSource', 'change') }}>
+                    <span class="ux-calendar-legend__swatch" style="background: {{ calendar.color|default('#3788d8') }}"></span>
+                    {{ calendar.label|default(id) }}
+                </label>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="{{ calendarClass }}" {{ stimulus_target(stimulusController, 'calendar') }}></div>
 </div>

@@ -2,6 +2,19 @@
 
 `survos/ux-calendar-bundle` is a small Symfony UX bundle for rendering FullCalendar with AssetMapper, Twig components, and Stimulus.
 
+## Where this fits
+
+Three projects, three jobs — don't confuse them:
+
+| Project | Role |
+|---|---|
+| **survos/ux-calendar-bundle** (this) | The **rendering/aggregation library**: FullCalendar v7 + AssetMapper + a normalized `EventSourceInterface` to merge iCal feeds. |
+| **[ccal](https://github.com/survos/ccal)** | The **Community Calendar Aggregator app**: orgs, feeds, moderation, user subscriptions, event flags. Consumes this bundle. |
+| `demo/` (in this repo) | A **minimal smoke-test** of the bundle. Not the app — that's ccal. |
+
+> Deprecated/archived predecessors that blurred these lines: `survos/rappcal`,
+> `tacman/CalendarBundle` (tattali fork), `survos-sites/calendar-demo`.
+
 ## Current scope
 
 - AssetMapper-aware bundle setup

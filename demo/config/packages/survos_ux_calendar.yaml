@@ -1,0 +1,44 @@
+survos_ux_calendar:
+    calendars:
+        lions:
+            label: 'Lions Club of Rappahannock'
+            color: '#1f77b4'
+            url: 'https://calendar.google.com/calendar/ical/d8c90ebc8579b293deadccedb39bee7c9abd008f54998afdcb63f36707695ca8%%40group.calendar.google.com/public/basic.ics'
+
+        supervisors:
+            label: 'Board of Supervisors (County)'
+            color: '#17becf'
+            url: 'https://cms9.revize.com/revize/plugins/calendar/editpages/export_events.jsp?webspaceId=rappahannockva&CAL_ID=1&timezoneid=America/New_York'
+
+        schools:
+            label: 'School Board / District'
+            color: '#8c564b'
+            url: 'https://www.rappahannockschools.us/sys/calendar/export?widgetId=d6126e0003184b988fe3c818500cf376&type=2'
+
+        flint_hill_fire:
+            label: 'Flint Hill Fire Co.'
+            color: '#d62728'
+            url: 'https://flinthillfireva.com/events/?ical=1'
+
+        county_park:
+            label: 'Rappahannock County Park'
+            color: '#bcbd22'
+            url: 'https://calendar.google.com/calendar/ical/rappdarkskies%%40gmail.com/public/basic.ics'
+
+        # RAAC embed calendar is not yet shared as public iCal (HTTP 404). Set it to
+        # "Public — see all event details" OR paste its "Secret address in iCal format".
+        # The aggregator skips unreachable feeds gracefully.
+        raac:
+            label: 'RAAC Events'
+            color: '#2ca02c'
+            url: 'https://calendar.google.com/calendar/ical/c_66d8f946665216a5d509c0bfe4148edecc4b7b7eb744dbbc4fe5ba5ef9eb5988%%40group.calendar.google.com/public/basic.ics'
+
+        us_holidays:
+            label: 'US Holidays'
+            color: '#9467bd'
+            url: 'https://calendar.google.com/calendar/ical/en.usa%%23holiday%%40group.v.calendar.google.com/public/basic.ics'
+
+        moon:
+            label: 'Phases of the Moon'
+            color: '#ff7f0e'
+            url: 'https://calendar.google.com/calendar/ical/ht3jlfaac5lfd6263ulfh4tql8%%40group.calendar.google.com/public/basic.ics'

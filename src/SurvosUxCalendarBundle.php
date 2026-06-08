@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Survos\UxCalendarBundle;
 
 use Survos\UxCalendarBundle\Components\FullCalendarComponent;
+use Survos\UxCalendarBundle\Contract\EventSourceInterface;
 use Survos\UxCalendarBundle\Controller\CalendarFeedController;
 use Survos\UxCalendarBundle\Mapper\AttributeEntityEventMapper;
 use Survos\UxCalendarBundle\Service\EventSourceRegistry;
+use Survos\UxCalendarBundle\Source\ConfiguredIcsSource;
 use Survos\UxCalendarBundle\Source\IcsEventSource;
 use Survos\Kit\AbstractUxBundle;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
@@ -28,6 +30,7 @@ class SurvosUxCalendarBundle extends AbstractUxBundle
             ->setAutowired(true)
             ->setAutoconfigured(true)
             ->setArgument('$stimulusController', $config['stimulus_controller'])
+            ->setArgument('$calendars', $config['calendars'] ?? [])
         ;
 
         $builder->autowire(CalendarFeedController::class)
@@ -41,6 +44,12 @@ class SurvosUxCalendarBundle extends AbstractUxBundle
             ->setAutoconfigured(true)
         ;
 
+        // Any service implementing EventSourceInterface — in this bundle OR a consumer
+        // app (e.g. a DatabaseEventSource) — is tagged automatically. No services.yaml.
+        $builder->registerForAutoconfiguration(EventSourceInterface::class)
+            ->addTag('survos.ux_calendar.event_source')
+        ;
+
         $builder->register(EventSourceRegistry::class)
             ->setAutowired(true)
             ->setAutoconfigured(true)
@@ -50,7 +59,12 @@ class SurvosUxCalendarBundle extends AbstractUxBundle
         $builder->register(IcsEventSource::class)
             ->setAutowired(true)
             ->setAutoconfigured(true)
-            ->addTag('survos.ux_calendar.event_source')
+        ;
+
+        $builder->register(ConfiguredIcsSource::class)
+            ->setAutowired(true)
+            ->setAutoconfigured(true)
+            ->setArgument('$calendars', $config['calendars'] ?? [])
         ;
     }
 
@@ -58,9 +72,20 @@ class SurvosUxCalendarBundle extends AbstractUxBundle
     {
         $definition->rootNode()
             ->children()
-            ->scalarNode('stimulus_controller')
-                ->defaultValue('@survos/ux-calendar/fullcalendar')
-            ->end()
+                ->scalarNode('stimulus_controller')
+                    ->defaultValue('@survos/ux-calendar-bundle/fullcalendar')
+                ->end()
+                ->arrayNode('calendars')
+                    ->info('Named iCal calendars to aggregate, keyed by a short id.')
+                    ->useAttributeAsKey('id')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('label')->defaultNull()->end()
+                            ->scalarNode('color')->defaultNull()->end()
+                            ->scalarNode('url')->isRequired()->cannotBeEmpty()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
     }
 }
