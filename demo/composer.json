@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "symfony/asset-mapper": "^8.0",
         "symfony/dotenv": "^8.0",
         "symfony/flex": "^2.10",
