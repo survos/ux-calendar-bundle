@@ -29,7 +29,6 @@
         "survos/kit-bundle": "^2.5"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^13.0",
         "symfony/framework-bundle": "^8.1",
