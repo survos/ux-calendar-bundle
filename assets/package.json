@@ -13,22 +13,7 @@
       }
     },
     "importmap": {
-      "@hotwired/stimulus": "3.2.2",
-      "preact": "10.19.5",
-      "preact/hooks": "10.19.5",
-      "preact/jsx-runtime": "10.19.5",
-      "preact/compat": "10.19.5",
-      "preact/compat/client": "10.19.5",
-      "temporal-polyfill/fns/zoneddatetime": "0.3.2",
-      "temporal-polyfill/fns/plaindatetime": "0.3.2",
-      "temporal-polyfill/fns/instant": "0.3.2",
-      "@full-ui/headless-calendar": "7.0.0-beta.8",
-      "fullcalendar": "7.0.0-beta.8",
-      "fullcalendar/themes/classic": "7.0.0-beta.8",
-      "fullcalendar/interaction": "7.0.0-beta.8",
-      "fullcalendar/daygrid": "7.0.0-beta.8",
-      "fullcalendar/timegrid": "7.0.0-beta.8",
-      "fullcalendar/list": "7.0.0-beta.8"
+      "@hotwired/stimulus": "3.2.2"
     }
   },
   "peerDependencies": {
@@ -36,9 +21,9 @@
   },
   "devDependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@full-ui/headless-calendar": "7.0.0-beta.8",
-    "fullcalendar": "7.0.0-beta.8",
-    "preact": "10.19.5",
+    "@full-ui/headless-calendar": "7.0.0-rc.3",
+    "fullcalendar": "7.0.0-rc.3",
+    "preact": "10.29.1",
     "temporal-polyfill": "0.3.2"
   }
 }
