@@ -20,8 +20,6 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_it
 // Symfony\Component\HttpKernel\Bundle\Bundle <-- Flex auto-registration marker (see Survos\Kit\AbstractSurvosBundle)
 class SurvosUxCalendarBundle extends AbstractUxBundle
 {
-    public const ASSET_PACKAGE = 'ux-calendar';
-
     /**
      * @param array<mixed> $config
      */

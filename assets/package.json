@@ -1,5 +1,5 @@
 {
-  "name": "@survos/ux-calendar",
+  "name": "@survos/ux-calendar-bundle",
   "description": "integrate php and javascript helpers for FullCalendar with AssetMapper and Symfony UX",
   "license": "MIT",
   "version": "1.0.0",
