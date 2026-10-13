@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Survos\UxCalendarBundle;
 
+use Survos\Kit\AbstractUxBundle;
 use Survos\UxCalendarBundle\Components\FullCalendarComponent;
 use Survos\UxCalendarBundle\Contract\EventSourceInterface;
 use Survos\UxCalendarBundle\Controller\CalendarFeedController;
@@ -11,10 +12,10 @@ use Survos\UxCalendarBundle\Mapper\AttributeEntityEventMapper;
 use Survos\UxCalendarBundle\Service\EventSourceRegistry;
 use Survos\UxCalendarBundle\Source\ConfiguredIcsSource;
 use Survos\UxCalendarBundle\Source\IcsEventSource;
-use Survos\Kit\AbstractUxBundle;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 // Symfony\Component\HttpKernel\Bundle\Bundle <-- Flex auto-registration marker (see Survos\Kit\AbstractSurvosBundle)

@@ -35,7 +35,7 @@ final class IcsEventSource implements EventSourceInterface
             : $ical->events();
 
         return array_map(
-            fn(object $event): CalendarEvent => $this->mapEvent($event),
+            fn (object $event): CalendarEvent => $this->mapEvent($event),
             $events,
         );
     }
@@ -49,7 +49,7 @@ final class IcsEventSource implements EventSourceInterface
             $end = $event->dtend instanceof \DateTimeInterface ? $event->dtend : new \DateTimeImmutable((string) $event->dtend);
         }
 
-        $allDay = strlen((string) $event->dtstart) === 8;
+        $allDay = 8 === strlen((string) $event->dtstart);
 
         return new CalendarEvent(
             id: isset($event->uid) ? (string) $event->uid : null,

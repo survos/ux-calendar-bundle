@@ -28,7 +28,7 @@ final class CalendarFeedController extends AbstractController
         $filters = $this->parseFilters($params['filters'] ?? []);
 
         $events = array_map(
-            static fn($event) => $event->toArray(),
+            static fn ($event) => $event->toArray(),
             $this->registry->getEvents($start, $end, $filters),
         );
 
